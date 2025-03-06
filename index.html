@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelvin Light Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Kelvin Light Visualizer</h1>
+        <input type="range" id="kelvin-slider" min="2000" max="10000" value="4000" step="100">
+        <p>Kelvin: <span id="kelvin-value">4000</span>K</p>
+        <div id="light-display"></div>
+        <div class="info">
+            <p><strong>Warm White:</strong> 2000K - 3500K</p>
+            <p><strong>Daylight:</strong> 4000K - 5500K</p>
+            <p><strong>Cool White:</strong> 6000K - 10000K</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
