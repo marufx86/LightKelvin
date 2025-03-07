@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const kelvinSlider = document.getElementById("kelvin-slider");
     const kelvinValue = document.getElementById("kelvin-value");
     const rgbValue = document.getElementById("rgb-value");
+    const hsvValue = document.getElementById("hsv-value");
+    const hslValue = document.getElementById("hsl-value");
+    const linearValue = document.getElementById("linear-value");
     const lightDisplay = document.getElementById("light-display");
     const copyBtn = document.getElementById("copy-btn");
     const exportBtn = document.getElementById("export-btn");
@@ -16,7 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
         lightDisplay.style.backgroundColor = colorString;
         lightDisplay.style.boxShadow = `0px 0px 50px ${colorString}`;
         rgbValue.textContent = colorArray.join(', ');
-
+        
+        // Update additional conversions
+        hsvValue.textContent = rgbToHsv(colorArray[0], colorArray[1], colorArray[2]).join(', ');
+        hslValue.textContent = rgbToHsl(colorArray[0], colorArray[1], colorArray[2]).join(', ');
+        linearValue.textContent = rgbToLinear(colorArray[0], colorArray[1], colorArray[2]).join(', ');
+        
         // Update export output with current settings
         updateExport(kelvin, colorArray);
     });
@@ -51,6 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         exportData.rgb = colorArray;
         exportData.hex = rgbToHex(colorArray);
+        exportData.hsv = rgbToHsv(colorArray[0], colorArray[1], colorArray[2]);
+        exportData.hsl = rgbToHsl(colorArray[0], colorArray[1], colorArray[2]);
+        exportData.linear = rgbToLinear(colorArray[0], colorArray[1], colorArray[2]);
         exportOutput.value = JSON.stringify(exportData, null, 2);
     }
 
@@ -78,6 +89,58 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Convert RGB to HSV (Hue in degrees, Saturation and Value in percentage)
+    function rgbToHsv(r, g, b) {
+        let rNorm = r / 255, gNorm = g / 255, bNorm = b / 255;
+        let max = Math.max(rNorm, gNorm, bNorm), min = Math.min(rNorm, gNorm, bNorm);
+        let delta = max - min;
+        let h = 0;
+        if (delta === 0) {
+            h = 0;
+        } else if (max === rNorm) {
+            h = 60 * (((gNorm - bNorm) / delta) % 6);
+        } else if (max === gNorm) {
+            h = 60 * (((bNorm - rNorm) / delta) + 2);
+        } else if (max === bNorm) {
+            h = 60 * (((rNorm - gNorm) / delta) + 4);
+        }
+        if (h < 0) h += 360;
+        let s = max === 0 ? 0 : (delta / max);
+        let v = max;
+        return [Math.round(h), Math.round(s * 100), Math.round(v * 100)];
+    }
+
+    // Convert RGB to HSL (Hue in degrees, Saturation and Lightness in percentage)
+    function rgbToHsl(r, g, b) {
+        let rNorm = r / 255, gNorm = g / 255, bNorm = b / 255;
+        let max = Math.max(rNorm, gNorm, bNorm), min = Math.min(rNorm, gNorm, bNorm);
+        let l = (max + min) / 2;
+        let s = 0;
+        let h = 0;
+        if (max !== min) {
+            let d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            if (max === rNorm) {
+                h = ((gNorm - bNorm) / d) + (gNorm < bNorm ? 6 : 0);
+            } else if (max === gNorm) {
+                h = ((bNorm - rNorm) / d) + 2;
+            } else if (max === bNorm) {
+                h = ((rNorm - gNorm) / d) + 4;
+            }
+            h *= 60;
+        }
+        return [Math.round(h), Math.round(s * 100), Math.round(l * 100)];
+    }
+
+    // Convert RGB to Linear space (values normalized between 0 and 1)
+    function rgbToLinear(r, g, b) {
+        return [
+            (r / 255).toFixed(3),
+            (g / 255).toFixed(3),
+            (b / 255).toFixed(3)
+        ];
+    }
+
     // Function to copy text to clipboard for preset values
     window.copyText = function(text) {
         navigator.clipboard.writeText(text)
@@ -97,7 +160,12 @@ document.addEventListener("DOMContentLoaded", function() {
         lightDisplay.style.backgroundColor = colorString;
         lightDisplay.style.boxShadow = `0px 0px 50px ${colorString}`;
         rgbValue.textContent = rgbArray.join(', ');
-
+        
+        // Update additional conversions for preset
+        hsvValue.textContent = rgbToHsv(rgbArray[0], rgbArray[1], rgbArray[2]).join(', ');
+        hslValue.textContent = rgbToHsl(rgbArray[0], rgbArray[1], rgbArray[2]).join(', ');
+        linearValue.textContent = rgbToLinear(rgbArray[0], rgbArray[1], rgbArray[2]).join(', ');
+        
         // If an approximate Kelvin value is provided and is a valid number, update the slider and Kelvin display
         if (typeof approximateKelvin === 'number') {
             kelvinSlider.value = approximateKelvin;
