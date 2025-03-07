@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Update export area with JSON of current settings
     function updateExport(kelvin, colorArray) {
         const exportData = {};
-        if (kelvin !== null) {
+        if (kelvin != null) {
             exportData.kelvin = kelvin;
         }
         exportData.rgb = colorArray;
@@ -89,15 +89,23 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     };
 
-    // Function to visualize preset colors (without changing the Kelvin slider)
-    window.visualizePreset = function(rgbString) {
+    // Function to visualize preset colors and update Kelvin slider if an approximate Kelvin value is provided
+    window.visualizePreset = function(rgbString, approximateKelvin) {
         let rgbArray = rgbString.split(',').map(x => parseInt(x.trim()));
         let colorString = `rgb(${rgbArray.join(',')})`;
+        // Update display with preset color
         lightDisplay.style.backgroundColor = colorString;
         lightDisplay.style.boxShadow = `0px 0px 50px ${colorString}`;
         rgbValue.textContent = rgbArray.join(', ');
-        // When visualizing a preset, Kelvin is not applicable; update export accordingly
-        updateExport(null, rgbArray);
+
+        // If an approximate Kelvin value is provided and is a valid number, update the slider and Kelvin display
+        if (typeof approximateKelvin === 'number') {
+            kelvinSlider.value = approximateKelvin;
+            kelvinValue.textContent = approximateKelvin;
+        }
+        
+        // Update export output with current (or preset) settings
+        updateExport(approximateKelvin, rgbArray);
     };
 
     // Initialize the display on page load
