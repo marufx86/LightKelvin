@@ -23,7 +23,7 @@ body {
     box-shadow: 0px 0px 30px 10px rgba(255, 243, 224, 0.5);
   }
   
-  .info, .export {
+  .info, .export, .presets {
     margin-top: 20px;
     font-size: 14px;
   }
@@ -48,5 +48,28 @@ body {
     height: 100px;
     margin-top: 10px;
     resize: none;
+  }
+  
+  /* Table styling for presets */
+  .presets table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .presets th, .presets td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .presets th {
+    background-color: #333;
+  }
+  
+  .presets .note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #aaa;
   }
   

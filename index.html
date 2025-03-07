@@ -25,6 +25,175 @@
       <button id="export-btn">Export Settings</button>
       <textarea id="export-output" readonly></textarea>
     </div>
+    <div class="presets">
+      <h2>Lighting Presets</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>RGB</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Candle</td>
+            <td>255, 147, 41</td>
+            <td>
+              <button onclick="copyText('255, 147, 41')">Copy</button>
+              <button onclick="visualizePreset('255, 147, 41')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>40W Tungsten</td>
+            <td>255, 197, 143</td>
+            <td>
+              <button onclick="copyText('255, 197, 143')">Copy</button>
+              <button onclick="visualizePreset('255, 197, 143')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>100W Tungsten</td>
+            <td>255, 214, 170</td>
+            <td>
+              <button onclick="copyText('255, 214, 170')">Copy</button>
+              <button onclick="visualizePreset('255, 214, 170')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Halogen</td>
+            <td>255, 241, 224</td>
+            <td>
+              <button onclick="copyText('255, 241, 224')">Copy</button>
+              <button onclick="visualizePreset('255, 241, 224')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Carbon Arc</td>
+            <td>255, 250, 244</td>
+            <td>
+              <button onclick="copyText('255, 250, 244')">Copy</button>
+              <button onclick="visualizePreset('255, 250, 244')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>High Noon Sun</td>
+            <td>255, 255, 251</td>
+            <td>
+              <button onclick="copyText('255, 255, 251')">Copy</button>
+              <button onclick="visualizePreset('255, 255, 251')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Direct Sunlight</td>
+            <td>255, 255, 255</td>
+            <td>
+              <button onclick="copyText('255, 255, 255')">Copy</button>
+              <button onclick="visualizePreset('255, 255, 255')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Overcast Sky</td>
+            <td>201, 226, 255</td>
+            <td>
+              <button onclick="copyText('201, 226, 255')">Copy</button>
+              <button onclick="visualizePreset('201, 226, 255')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Clear Blue Sky</td>
+            <td>64, 156, 255</td>
+            <td>
+              <button onclick="copyText('64, 156, 255')">Copy</button>
+              <button onclick="visualizePreset('64, 156, 255')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Warm Fluorescent</td>
+            <td>255, 244, 229</td>
+            <td>
+              <button onclick="copyText('255, 244, 229')">Copy</button>
+              <button onclick="visualizePreset('255, 244, 229')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Standard Fluorescent</td>
+            <td>244, 255, 250</td>
+            <td>
+              <button onclick="copyText('244, 255, 250')">Copy</button>
+              <button onclick="visualizePreset('244, 255, 250')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Cool White Fluorescent</td>
+            <td>212, 235, 255</td>
+            <td>
+              <button onclick="copyText('212, 235, 255')">Copy</button>
+              <button onclick="visualizePreset('212, 235, 255')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Full Spectrum Fluorescent</td>
+            <td>255, 244, 242</td>
+            <td>
+              <button onclick="copyText('255, 244, 242')">Copy</button>
+              <button onclick="visualizePreset('255, 244, 242')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Grow Light Fluorescent</td>
+            <td>255, 239, 247</td>
+            <td>
+              <button onclick="copyText('255, 239, 247')">Copy</button>
+              <button onclick="visualizePreset('255, 239, 247')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Black Light Fluorescent</td>
+            <td>167, 0, 255</td>
+            <td>
+              <button onclick="copyText('167, 0, 255')">Copy</button>
+              <button onclick="visualizePreset('167, 0, 255')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Mercury Vapor</td>
+            <td>216, 247, 255</td>
+            <td>
+              <button onclick="copyText('216, 247, 255')">Copy</button>
+              <button onclick="visualizePreset('216, 247, 255')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Sodium Vapor</td>
+            <td>255, 209, 178</td>
+            <td>
+              <button onclick="copyText('255, 209, 178')">Copy</button>
+              <button onclick="visualizePreset('255, 209, 178')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Metal Halide</td>
+            <td>242, 252, 255</td>
+            <td>
+              <button onclick="copyText('242, 252, 255')">Copy</button>
+              <button onclick="visualizePreset('242, 252, 255')">Visualize</button>
+            </td>
+          </tr>
+          <tr>
+            <td>High Pressure Sodium</td>
+            <td>255, 183, 76</td>
+            <td>
+              <button onclick="copyText('255, 183, 76')">Copy</button>
+              <button onclick="visualizePreset('255, 183, 76')">Visualize</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">
+        Recommended settings: Intensity = 1.0, Falloff = 2.0 (Quadratic falloff). Adjust radius and intensity as needed.
+      </p>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>

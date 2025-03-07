@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const exportBtn = document.getElementById("export-btn");
     const exportOutput = document.getElementById("export-output");
 
-    // Update display on slider input
+    // Update display on Kelvin slider input
     kelvinSlider.addEventListener("input", function() {
         const kelvin = parseInt(kelvinSlider.value);
         kelvinValue.textContent = kelvin;
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         updateExport(kelvin, colorArray);
     });
 
-    // Copy RGB values to clipboard
+    // Copy RGB values (from slider conversion) to clipboard
     copyBtn.addEventListener("click", function() {
         navigator.clipboard.writeText(rgbValue.textContent)
         .then(() => {
@@ -45,11 +45,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Update export area with JSON of current settings
     function updateExport(kelvin, colorArray) {
-        const exportData = {
-            kelvin: kelvin,
-            rgb: colorArray,
-            hex: rgbToHex(colorArray)
-        };
+        const exportData = {};
+        if (kelvin !== null) {
+            exportData.kelvin = kelvin;
+        }
+        exportData.rgb = colorArray;
+        exportData.hex = rgbToHex(colorArray);
         exportOutput.value = JSON.stringify(exportData, null, 2);
     }
 
@@ -76,6 +77,28 @@ document.addEventListener("DOMContentLoaded", function() {
             return interpolateColor([255, 255, 224], [200, 220, 255], (kelvin - 5500) / 4500);
         }
     }
+
+    // Function to copy text to clipboard for preset values
+    window.copyText = function(text) {
+        navigator.clipboard.writeText(text)
+        .then(() => {
+            alert("Preset RGB values copied to clipboard: " + text);
+        })
+        .catch(err => {
+            alert("Failed to copy preset: " + err);
+        });
+    };
+
+    // Function to visualize preset colors (without changing the Kelvin slider)
+    window.visualizePreset = function(rgbString) {
+        let rgbArray = rgbString.split(',').map(x => parseInt(x.trim()));
+        let colorString = `rgb(${rgbArray.join(',')})`;
+        lightDisplay.style.backgroundColor = colorString;
+        lightDisplay.style.boxShadow = `0px 0px 50px ${colorString}`;
+        rgbValue.textContent = rgbArray.join(', ');
+        // When visualizing a preset, Kelvin is not applicable; update export accordingly
+        updateExport(null, rgbArray);
+    };
 
     // Initialize the display on page load
     kelvinSlider.dispatchEvent(new Event("input"));
